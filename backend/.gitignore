@@ -1,0 +1,6 @@
+node_modules
+dist
+nutribot.db
+.env
+*.db-shm
+*.db-wal

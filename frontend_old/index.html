@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NutriBot — Your AI-Powered Personal Dietician</title>
+  <meta name="description" content="NutriBot is an AI-powered nutrition chatbot that acts as your personal dietician on WhatsApp. Create your health profile and get instant meal analysis and personalised suggestions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── NAV ──────────────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">🥗</span>
+        <span class="logo-text">NutriBot</span>
+      </a>
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#profile-form" class="btn btn-sm">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-glow glow-1"></div>
+    <div class="hero-bg-glow glow-2"></div>
+    <div class="hero-bg-glow glow-3"></div>
+
+    <div class="container">
+      <div class="hero-badge animate-fade-up">
+        <span class="badge-dot"></span>
+        AI-Powered Nutrition Intelligence
+      </div>
+
+      <h1 class="hero-title animate-fade-up delay-1">
+        Your Personal<br/>
+        <span class="gradient-text">AI Dietician</span><br/>
+        on WhatsApp
+      </h1>
+
+      <p class="hero-sub animate-fade-up delay-2">
+        Just tell NutriBot what you ate — in plain language. Get instant nutritional analysis,
+        personalised suggestions, and weekly progress reports. No app, no login, just chat.
+      </p>
+
+      <div class="hero-cta animate-fade-up delay-3">
+        <a href="#profile-form" class="btn btn-primary btn-lg" id="hero-cta-btn">
+          <span>Create Your Free Profile</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+      </div>
+
+      <!-- Chat preview mockup -->
+      <div class="chat-preview animate-fade-up delay-4">
+        <div class="chat-header">
+          <div class="chat-avatar">🥗</div>
+          <div>
+            <div class="chat-name">NutriBot</div>
+            <div class="chat-status">
+              <span class="online-dot"></span> Online
+            </div>
+          </div>
+        </div>
+        <div class="chat-body" id="chat-demo">
+          <!-- Messages injected by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ─────────────────────────────────────────────────────── -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-label">Simple & Effortless</div>
+      <h2 class="section-title">How NutriBot Works</h2>
+      <p class="section-sub">Three steps between you and smarter eating</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-icon">📋</div>
+          <h3>Create Your Profile</h3>
+          <p>Fill in your health details — weight, height, age, conditions, and allergies. We calculate your personalised daily calorie and macro targets using the Mifflin-St Jeor formula.</p>
+        </div>
+        <div class="step-connector">→</div>
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-icon">💬</div>
+          <h3>Chat on WhatsApp</h3>
+          <p>Message NutriBot on WhatsApp and just describe what you eat — in any language, any format. "Had 2 rotis with dal and a glass of lassi" is all you need.</p>
+        </div>
+        <div class="step-connector">→</div>
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-icon">✨</div>
+          <h3>Get AI Suggestions</h3>
+          <p>Your AI dietician analyses your meal, tracks your progress against daily targets, and gives you specific, actionable suggestions for your next meal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES ─────────────────────────────────────────────────────────── -->
+  <section class="section section-dark" id="features">
+    <div class="container">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-title">Everything a Dietician Offers</h2>
+      <p class="section-sub">Powered by GPT-4o-mini — available 24/7 on WhatsApp</p>
+
+      <div class="features-grid">
+        <div class="feature-card feature-card-large">
+          <div class="feature-icon-bg" style="--icon-color: #0f766e;">🧠</div>
+          <h3>Smart Meal Parsing</h3>
+          <p>Describe your meal in plain words — even Pakistani dishes like biryani, nihari, or karahi. Our AI extracts calories, protein, carbs, and fat with high accuracy.</p>
+          <div class="feature-tag">Powered by OpenAI</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-bg" style="--icon-color: #7c3aed;">🎯</div>
+          <h3>Personalised Targets</h3>
+          <p>TDEE calculated using Mifflin-St Jeor with your exact stats. Your macros are tailored to your goals.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-bg" style="--icon-color: #059669;">📊</div>
+          <h3>Daily Progress</h3>
+          <p>Type <em>today</em> on WhatsApp anytime to get your running totals and remaining targets for the day.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-bg" style="--icon-color: #d97706;">⚕️</div>
+          <h3>Health-Aware Advice</h3>
+          <p>Conditions like diabetes or hypertension are factored into every suggestion. Allergies are always respected.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-bg" style="--icon-color: #0284c7;">📧</div>
+          <h3>Weekly Email Reports</h3>
+          <p>Every Monday, receive a beautiful HTML summary of your average calories and macros for the week.</p>
+        </div>
+
+        <div class="feature-card feature-card-large">
+          <div class="feature-icon-bg" style="--icon-color: #25d366;">💬</div>
+          <h3>WhatsApp — Zero Friction</h3>
+          <p>No app install. No account creation. No login. Your number is your identity. Just open WhatsApp and start chatting — it's that simple.</p>
+          <div class="feature-tag feature-tag-green">No app required</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STATS ─────────────────────────────────────────────────────────────── -->
+  <section class="section section-stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number gradient-text">3s</div>
+          <div class="stat-label">Average response time</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gradient-text">95%</div>
+          <div class="stat-label">Macro estimation accuracy</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gradient-text">24/7</div>
+          <div class="stat-label">Available on WhatsApp</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number gradient-text">Free</div>
+          <div class="stat-label">No subscription needed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROFILE FORM ──────────────────────────────────────────────────────── -->
+  <section class="section" id="profile-form">
+    <div class="container">
+      <div class="section-label">Step 1 of 2</div>
+      <h2 class="section-title">Create Your Profile</h2>
+      <p class="section-sub">Takes less than 2 minutes. We use this to calculate your personalised daily targets.</p>
+
+      <div class="form-wrapper">
+        <!-- Progress bar -->
+        <div class="form-progress">
+          <div class="form-progress-bar" id="form-progress-bar"></div>
+        </div>
+
+        <form id="profile-form-el" novalidate>
+
+          <!-- Step 1: Basic Info -->
+          <div class="form-step active" id="step-1">
+            <h3 class="step-title">👤 Basic Information</h3>
+            <div class="form-grid">
+              <div class="form-group form-full">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="e.g. Ahmed Khan" autocomplete="name" required />
+                <span class="field-error" id="name-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="phone">WhatsApp Number <span class="label-note">(digits only, no +)</span></label>
+                <input type="tel" id="phone" name="phoneNumber" placeholder="e.g. 923001234567" required />
+                <span class="field-error" id="phone-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email <span class="label-note">(for weekly reports)</span></label>
+                <input type="email" id="email" name="email" placeholder="ahmed@example.com" autocomplete="email" />
+                <span class="field-error" id="email-error"></span>
+              </div>
+            </div>
+            <div class="form-nav">
+              <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+                Continue <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Body Metrics -->
+          <div class="form-step" id="step-2">
+            <h3 class="step-title">📏 Body Metrics</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="age">Age (years)</label>
+                <input type="number" id="age" name="age" placeholder="28" min="10" max="100" required />
+                <span class="field-error" id="age-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="field-error" id="gender-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weightKg" placeholder="72" min="20" max="300" step="0.1" required />
+                <span class="field-error" id="weight-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="heightCm" placeholder="175" min="100" max="250" required />
+                <span class="field-error" id="height-error"></span>
+              </div>
+            </div>
+            <div class="form-nav">
+              <button type="button" class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                Continue <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Lifestyle & Health -->
+          <div class="form-step" id="step-3">
+            <h3 class="step-title">🏃 Lifestyle & Health</h3>
+            <div class="form-grid">
+              <div class="form-group form-full">
+                <label for="activity">Activity Level</label>
+                <div class="activity-options" id="activity-options">
+                  <label class="activity-option" for="act-sedentary">
+                    <input type="radio" id="act-sedentary" name="activityLevel" value="sedentary" />
+                    <div class="activity-card">
+                      <div class="activity-emoji">🛋️</div>
+                      <div class="activity-name">Sedentary</div>
+                      <div class="activity-desc">Desk job, little exercise</div>
+                    </div>
+                  </label>
+                  <label class="activity-option" for="act-light">
+                    <input type="radio" id="act-light" name="activityLevel" value="lightly_active" />
+                    <div class="activity-card">
+                      <div class="activity-emoji">🚶</div>
+                      <div class="activity-name">Light</div>
+                      <div class="activity-desc">1–3 days/week</div>
+                    </div>
+                  </label>
+                  <label class="activity-option" for="act-moderate">
+                    <input type="radio" id="act-moderate" name="activityLevel" value="moderately_active" />
+                    <div class="activity-card">
+                      <div class="activity-emoji">🏋️</div>
+                      <div class="activity-name">Moderate</div>
+                      <div class="activity-desc">3–5 days/week</div>
+                    </div>
+                  </label>
+                  <label class="activity-option" for="act-very">
+                    <input type="radio" id="act-very" name="activityLevel" value="very_active" />
+                    <div class="activity-card">
+                      <div class="activity-emoji">🏃</div>
+                      <div class="activity-name">Very Active</div>
+                      <div class="activity-desc">6–7 days/week</div>
+                    </div>
+                  </label>
+                  <label class="activity-option" for="act-extra">
+                    <input type="radio" id="act-extra" name="activityLevel" value="extra_active" />
+                    <div class="activity-card">
+                      <div class="activity-emoji">⚡</div>
+                      <div class="activity-name">Extra Active</div>
+                      <div class="activity-desc">Physical job + training</div>
+                    </div>
+                  </label>
+                </div>
+                <span class="field-error" id="activity-error"></span>
+              </div>
+
+              <div class="form-group form-full">
+                <label for="conditions">Medical Conditions <span class="label-note">(optional)</span></label>
+                <input type="text" id="conditions" name="conditions" placeholder="e.g. diabetes, hypertension — or leave blank" />
+              </div>
+
+              <div class="form-group form-full">
+                <label for="allergies">Food Allergies <span class="label-note">(optional)</span></label>
+                <input type="text" id="allergies" name="allergies" placeholder="e.g. peanuts, gluten — or leave blank" />
+              </div>
+            </div>
+            <div class="form-nav">
+              <button type="button" class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+                <span id="submit-text">Create My Profile ✨</span>
+                <div class="btn-spinner hidden" id="submit-spinner"></div>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Success State -->
+        <div class="success-state hidden" id="success-state">
+          <div class="success-icon">🎉</div>
+          <h3 class="success-title">Profile Created!</h3>
+          <p class="success-sub" id="success-message">Your daily nutrition targets are ready.</p>
+
+          <div class="targets-grid" id="targets-grid">
+            <!-- Filled by JS -->
+          </div>
+
+          <div class="success-actions">
+            <a href="#" class="btn btn-whatsapp btn-lg" id="whatsapp-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Start Chatting on WhatsApp
+            </a>
+            <button class="btn btn-ghost" onclick="resetForm()">Create Another Profile</button>
+          </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-state hidden" id="error-state">
+          <div class="error-icon">⚠️</div>
+          <h3>Something went wrong</h3>
+          <p id="error-message">Please try again.</p>
+          <button class="btn btn-primary" onclick="hideError()">Try Again</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#" class="logo">
+          <span class="logo-icon">🥗</span>
+          <span class="logo-text">NutriBot</span>
+        </a>
+        <p class="footer-text">Built with ❤️ using NestJS, OpenAI, WhatsApp Cloud API, Resend & Sentry</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
