@@ -63,7 +63,7 @@ Respond ONLY with JSON in this exact format:
 
     try {
       const response = await this.openai.chat.completions.create({
-        model: 'llama-3.1-70b-versatile',
+        model: 'llama3-70b-8192',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },
@@ -106,7 +106,7 @@ If relevant to their question, here are their stats today: they have logged ${to
 
     try {
       const response = await this.openai.chat.completions.create({
-        model: 'llama-3.1-70b-versatile',
+        model: 'llama3-70b-8192',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
         max_tokens: 150,
@@ -161,7 +161,7 @@ Keep it conversational and motivating.`;
 
     try {
       const response = await this.openai.chat.completions.create({
-        model: 'llama-3.1-70b-versatile',
+        model: 'llama3-70b-8192',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
         max_tokens: 300,
