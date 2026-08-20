@@ -1,12 +1,18 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, Post, NotFoundException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { NutritionService } from './nutrition.service';
 import { FoodLog } from './food-log.entity';
+import { EmailService } from '../email/email.service';
+import { UsersService } from '../users/users.service';
 
 @ApiTags('nutrition')
 @Controller('nutrition')
 export class NutritionController {
-  constructor(private readonly nutritionService: NutritionService) {}
+  constructor(
+    private readonly nutritionService: NutritionService,
+    private readonly emailService: EmailService,
+    private readonly usersService: UsersService,
+  ) {}
 
   // ──────────────────────────────────────────────────────────────────────────
   // GET /api/nutrition/:userId/today
@@ -31,6 +37,29 @@ export class NutritionController {
     const today = new Date().toISOString().split('T')[0];
     const { logs, ...totals } = await this.nutritionService.getTodayTotals(userId);
     return { date: today, totals, logs };
+  }
+
+  // ────────────────────────────────────────────────────────────────────────────
+  // POST /api/nutrition/:userId/email-summary
+  // ────────────────────────────────────────────────────────────────────────────
+  @Post(':userId/email-summary')
+  @ApiOperation({
+    summary: "Email user's daily summary",
+    description: 'Triggers a daily summary email via Resend to the user.',
+  })
+  @ApiParam({ name: 'userId', description: 'User UUID' })
+  @ApiResponse({
+    status: 200,
+    description: "Email sent successfully",
+  })
+  async emailSummary(@Param('userId') userId: string) {
+    const user = await this.usersService.findById(userId);
+    if (!user) throw new NotFoundException('User not found');
+
+    const { logs, ...totals } = await this.nutritionService.getTodayTotals(userId);
+    await this.emailService.sendDailySummary(user, totals);
+    
+    return { success: true, message: 'Summary email sent' };
   }
 
   // ──────────────────────────────────────────────────────────────────────────

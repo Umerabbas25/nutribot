@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../lib/api';
 import { StatCard } from '../components/StatCard';
 import { WhatsAppButton } from '../components/WhatsAppButton';
-import { Flame, Droplets, Beef, Wheat, Coffee, MessageSquare } from 'lucide-react';
+import { Flame, Droplets, Beef, Wheat, Coffee, MessageSquare, Mail, Loader2 } from 'lucide-react';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip as RechartsTooltip } from 'recharts';
 
 export const Dashboard: React.FC = () => {
@@ -12,6 +12,7 @@ export const Dashboard: React.FC = () => {
   const [todayData, setTodayData] = useState<any>(null);
   const [gamification, setGamification] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [emailing, setEmailing] = useState(false);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -62,6 +63,19 @@ export const Dashboard: React.FC = () => {
     { name: 'Fats',    value: fat     || 0.001, color: '#ef4444' },
   ];
 
+  const handleEmailSummary = async () => {
+    try {
+      setEmailing(true);
+      await api.post(`/nutrition/${user.id}/email-summary`);
+      alert('Email sent successfully! Check your inbox.');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to send email. Please try again later.');
+    } finally {
+      setEmailing(false);
+    }
+  };
+
   return (
     <div className="container" style={{ padding: '2rem 2rem 4rem' }}>
 
@@ -72,6 +86,21 @@ export const Dashboard: React.FC = () => {
           <p style={{ color: 'var(--color-text-muted)', fontSize: '1.125rem' }}>Here is your nutrition summary for today.</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <button
+            onClick={handleEmailSummary}
+            disabled={emailing}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.75rem 1.5rem', borderRadius: '9999px', fontWeight: 600,
+              background: emailing ? '#475569' : '#3b82f6',
+              color: 'white', border: 'none', cursor: emailing ? 'not-allowed' : 'pointer',
+              boxShadow: emailing ? 'none' : '0 4px 14px rgba(59,130,246,0.4)',
+              transition: 'all 0.2s',
+            }}
+          >
+            {emailing ? <Loader2 size={18} className="spin" /> : <Mail size={18} />}
+            {emailing ? 'Sending...' : 'Email Summary'}
+          </button>
           <Link
             to="/chat"
             style={{

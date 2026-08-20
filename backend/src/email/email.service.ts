@@ -10,6 +10,13 @@ interface WeeklyStats {
   daysLogged: number;
 }
 
+interface DailyStats {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
 @Injectable()
 export class EmailService {
   private readonly logger = new Logger(EmailService.name);
@@ -71,6 +78,33 @@ export class EmailService {
       }
     } catch (err) {
       this.logger.error('Weekly email send exception', err);
+    }
+  }
+
+  /**
+   * Send the daily nutrition summary email.
+   */
+  async sendDailySummary(user: User, stats: DailyStats): Promise<void> {
+    if (!user.email) return;
+
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+    const fromName = process.env.RESEND_FROM_NAME || 'NutriBot';
+
+    try {
+      const { error } = await this.resend.emails.send({
+        from: `${fromName} <${fromEmail}>`,
+        to: [user.email],
+        subject: `Your Daily Nutrition Report 🥗`,
+        html: this.buildDailySummaryHtml(user, stats),
+      });
+
+      if (error) {
+        this.logger.error(`Resend daily email failed for ${user.email}`, error);
+      } else {
+        this.logger.log(`📬  Daily summary sent to ${user.email}`);
+      }
+    } catch (err) {
+      this.logger.error('Daily email send exception', err);
     }
   }
 
@@ -216,6 +250,81 @@ export class EmailService {
 
     <div style="background:#1e293b;border-radius:16px;padding:24px;border:1px solid #334155;text-align:center;">
       <p style="color:#94a3b8;margin:0 0 16px;">Keep logging your meals on WhatsApp for a better next week! 💪</p>
+    </div>
+
+    <p style="color:#475569;font-size:12px;text-align:center;margin:24px 0 0;">
+      © 2024 NutriBot — Your AI Dietician
+    </p>
+  </div>
+</body>
+</html>`;
+  }
+
+  private buildDailySummaryHtml(user: User, stats: DailyStats): string {
+    const calPct = user.dailyCalorieTarget
+      ? Math.round((stats.calories / user.dailyCalorieTarget) * 100)
+      : 0;
+
+    const proteinPct = user.proteinGrams
+      ? Math.round((stats.protein / user.proteinGrams) * 100)
+      : 0;
+
+    const calColor = calPct < 80 ? '#3b82f6' : calPct > 110 ? '#ef4444' : '#10b981';
+    const proteinColor = proteinPct < 80 ? '#ef4444' : '#10b981';
+
+    return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Your Daily Nutrition Report</title>
+</head>
+<body style="margin:0;padding:0;background:#0f172a;font-family:'Segoe UI',Arial,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+    <div style="background:linear-gradient(135deg,#0f766e,#065f46);border-radius:16px;padding:40px;text-align:center;margin-bottom:24px;">
+      <div style="font-size:48px;margin-bottom:8px;">🥗</div>
+      <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Your Daily Report</h1>
+      <p style="color:#a7f3d0;margin:8px 0 0;">${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+    </div>
+
+    <div style="background:#1e293b;border-radius:16px;padding:32px;margin-bottom:24px;border:1px solid #334155;">
+      <h2 style="color:#f1f5f9;margin:0 0 8px;font-size:20px;">Hey ${user.name || 'there'}! 👋</h2>
+      <p style="color:#94a3b8;margin:0 0 24px;">
+        Here is your summary for today:
+      </p>
+
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+          <span style="color:#94a3b8;">Calories</span>
+          <span style="color:${calColor};font-weight:700;">${stats.calories} / ${user.dailyCalorieTarget} kcal (${calPct}%)</span>
+        </div>
+        <div style="background:#334155;border-radius:999px;height:8px;overflow:hidden;">
+          <div style="background:${calColor};height:100%;width:${Math.min(calPct, 100)}%;border-radius:999px;"></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+          <span style="color:#94a3b8;">Protein</span>
+          <span style="color:${proteinColor};font-weight:700;">${stats.protein}g / ${user.proteinGrams}g (${proteinPct}%)</span>
+        </div>
+        <div style="background:#334155;border-radius:999px;height:8px;overflow:hidden;">
+          <div style="background:${proteinColor};height:100%;width:${Math.min(proteinPct, 100)}%;border-radius:999px;"></div>
+        </div>
+      </div>
+
+      <table style="width:100%;border-collapse:separate;border-spacing:8px;margin-top:16px;">
+        <tr>
+          <td style="background:#0f172a;border-radius:12px;padding:16px;text-align:center;">
+            <div style="color:#64748b;font-size:11px;text-transform:uppercase;">Carbs</div>
+            <div style="color:#f59e0b;font-size:22px;font-weight:700;">${stats.carbs}g</div>
+          </td>
+          <td style="background:#0f172a;border-radius:12px;padding:16px;text-align:center;">
+            <div style="color:#64748b;font-size:11px;text-transform:uppercase;">Fat</div>
+            <div style="color:#ef4444;font-size:22px;font-weight:700;">${stats.fat}g</div>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <p style="color:#475569;font-size:12px;text-align:center;margin:24px 0 0;">
