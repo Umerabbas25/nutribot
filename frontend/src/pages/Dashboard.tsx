@@ -150,7 +150,7 @@ export const Dashboard: React.FC = () => {
                 <Pie data={macroData} cx="50%" cy="50%" innerRadius={80} outerRadius={110} paddingAngle={5} dataKey="value">
                   {macroData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
                 </Pie>
-                <RechartsTooltip formatter={(v: number) => `${v < 0.01 ? 0 : Math.round(v)}g`} />
+                <RechartsTooltip formatter={(v: any) => `${v < 0.01 ? 0 : Math.round(Number(v))}g`} />
               </PieChart>
             </ResponsiveContainer>
           </div>

@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // Trigger re-render on navigation
+  useLocation(); // Trigger re-render on navigation
   const isLoggedIn = !!localStorage.getItem('userPhone');
 
   const handleLogout = () => {

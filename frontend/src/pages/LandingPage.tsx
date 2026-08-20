@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../lib/api';
-import { Activity, Apple, Scale, Phone } from 'lucide-react';
+import { Activity, Apple, Phone } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
@@ -63,7 +63,7 @@ export const LandingPage: React.FC = () => {
     const cleanPhone = signInPhone.replace(/\D/g, '');
 
     try {
-      const response = await api.get(`/users/${cleanPhone}`);
+      await api.get(`/users/${cleanPhone}`);
       
       localStorage.setItem('userPhone', cleanPhone);
       // Construct whatsapp link for sign in
